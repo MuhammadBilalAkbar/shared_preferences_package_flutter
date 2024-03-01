@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../screens/signin_screen.dart';
 import '../screens/signup_screen.dart';
 import '../theme/theme.dart';
@@ -32,19 +33,17 @@ class WelcomeScreen extends StatelessWidget {
                               fontWeight: FontWeight.w600,
                             )),
                         TextSpan(
-                            text:
-                                '\nEnter personal details to your employee account',
-                            style: TextStyle(
-                              fontSize: 20,
-                              // height: 0,
-                            ))
+                          text:
+                              '\nEnter personal details to your employee account',
+                          style: TextStyle(fontSize: 20),
+                        ),
                       ],
                     ),
                   ),
                 ),
               )),
           Flexible(
-            flex: 1,
+            flex: 2,
             child: Align(
               alignment: Alignment.bottomRight,
               child: Row(
