@@ -33,7 +33,6 @@ class ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: const Text('User Profile'),
-          centerTitle: false,
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 10),

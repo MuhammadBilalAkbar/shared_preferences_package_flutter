@@ -16,7 +16,7 @@ class BuildTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => TextFormField(
-        obscureText: true,
+        obscureText: obscureText,
         // obscuringCharacter: '*',
         controller: controller,
         validator: (value) {

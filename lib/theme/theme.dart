@@ -20,6 +20,10 @@ ThemeData lightMode = ThemeData(
   useMaterial3: true,
   brightness: Brightness.light,
   colorScheme: lightColorScheme,
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Color(0xFF416FDF),
+    foregroundColor: Color(0xFFFFFFFF),
+  ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       backgroundColor: lightColorScheme.primary,

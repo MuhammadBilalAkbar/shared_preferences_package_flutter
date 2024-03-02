@@ -61,6 +61,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ScaffoldMessenger.of(context).showSnackBar(
             showSnackBar('Account Already exists'),
           );
+        } else {
+          debugPrint('$e');
+          ScaffoldMessenger.of(context).showSnackBar(showSnackBar('$e'));
         }
       }
     } else {
@@ -101,35 +104,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         Text(
                           'Get Started',
                           style: TextStyle(
-                            fontSize: 30.0,
+                            fontSize: 30,
                             fontWeight: FontWeight.w900,
                             color: lightColorScheme.primary,
                           ),
                         ),
-                        const SizedBox(height: 40.0),
+                        const SizedBox(height: 40),
                         BuildTextFormField(
                           validateText: 'Please enter email',
                           labelText: 'Email',
                           controller: emailController,
                         ),
-                        const SizedBox(height: 25.0),
+                        const SizedBox(height: 25),
                         BuildTextFormField(
                           validateText: 'Please enter password',
                           labelText: 'Password',
-                          controller: emailController,
+                          controller: passwordController,
+                          obscureText: true,
                         ),
-                        const SizedBox(height: 25.0),
+                        const SizedBox(height: 25),
                         BuildTextFormField(
                           validateText: 'Please confirm password',
                           labelText: 'Confirm Password',
-                          controller: emailController,
+                          controller: confirmPasswordController,
+                          obscureText: true,
                         ),
-                        const SizedBox(height: 25.0),
+                        const SizedBox(height: 25),
                         Row(
                           children: [
                             Checkbox(
                               value: agreePersonalData,
-                              onChanged: (bool? value) => setState(
+                              onChanged: (value) => setState(
                                 () => agreePersonalData = value!,
                               ),
                               activeColor: lightColorScheme.primary,
@@ -147,7 +152,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 25.0),
+                        const SizedBox(height: 25),
                         // signup button
                         SizedBox(
                           width: double.infinity,
@@ -155,9 +160,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             onPressed: () {
                               if (formSignupKey.currentState!.validate() &&
                                   agreePersonalData) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  showSnackBar('Processing Data'),
-                                );
+                                signUpUser();
                               } else if (!agreePersonalData) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   showSnackBar(
@@ -169,7 +172,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             child: const Text('Sign up'),
                           ),
                         ),
-                        const SizedBox(height: 30.0),
+                        const SizedBox(height: 30),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -194,7 +197,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 30.0),
+                        const SizedBox(height: 30),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -204,7 +207,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             Logo(Logos.apple),
                           ],
                         ),
-                        const SizedBox(height: 25.0),
+                        const SizedBox(height: 25),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -233,7 +236,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 20.0),
+                        const SizedBox(height: 20),
                       ],
                     ),
                   ),

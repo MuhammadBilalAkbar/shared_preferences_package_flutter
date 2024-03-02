@@ -86,6 +86,9 @@ class _SignInScreenState extends State<SignInScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           showSnackBar('Wrong Password Provided by User'),
         );
+      } else {
+        debugPrint('$e');
+        ScaffoldMessenger.of(context).showSnackBar(showSnackBar('$e'));
       }
     }
   }
@@ -165,14 +168,14 @@ class _SignInScreenState extends State<SignInScreen> {
                         const SizedBox(height: 25),
                         ElevatedButton(
                           onPressed: () {
-                            if (formSignInKey.currentState!.validate() &&
-                                rememberPassword) {
+                            if (formSignInKey.currentState!.validate()) {
+                              signInUser();
                               ScaffoldMessenger.of(context).showSnackBar(
-                                showSnackBar('Processing Data'),
+                                showSnackBar('Signing In'),
                               );
                             }
                           },
-                          child: const Text('Sign up'),
+                          child: const Text('Sign in'),
                         ),
                         const SizedBox(height: 25),
                         Row(
@@ -187,7 +190,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             const Padding(
                               padding: EdgeInsets.symmetric(horizontal: 10),
                               child: Text(
-                                'Sign up with',
+                                'Sign in with',
                                 style: TextStyle(color: Colors.black45),
                               ),
                             ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences_package_flutter/screens/welcome_screen.dart';
 
 import '/screens/profile_screen.dart';
-import '/screens/signin_screen.dart';
 
 class CheckStatus extends StatelessWidget {
   const CheckStatus({super.key});
@@ -19,7 +19,7 @@ class CheckStatus extends StatelessWidget {
         future: checkLoginStatus(),
         builder: (context, snapshot) {
           if (snapshot.data == false) {
-            return const SignInScreen();
+            return const WelcomeScreen();
           } else if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
