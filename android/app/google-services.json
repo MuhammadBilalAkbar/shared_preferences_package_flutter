@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "968903598520",
+    "project_id": "flutter-shared-preferences",
+    "storage_bucket": "flutter-shared-preferences.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968903598520:android:bb3c2965b61460bc706f4d",
+        "android_client_info": {
+          "package_name": "com.example.shared_preferences_package_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5SvHW0Q1tsegGTZvdHvX9Irmo1qCDXUg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
