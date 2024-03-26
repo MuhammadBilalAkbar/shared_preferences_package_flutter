@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
-import 'package:shared_preferences_package_flutter/widgets/build_snackbar.dart';
+import 'package:shared_preferences_package_flutter/widgets/show_snackbar.dart';
 import 'package:shared_preferences_package_flutter/widgets/build_text_form_field.dart';
 
 import '../screens/signin_screen.dart';
@@ -75,7 +75,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   @override
-  Widget build(BuildContext context) => CustomScaffold(
+  Widget build(BuildContext context) => BuildCustomScaffold(
         child: Column(
           children: [
             const Expanded(

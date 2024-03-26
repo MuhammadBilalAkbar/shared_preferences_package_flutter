@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class WelcomeButton extends StatelessWidget {
-  const WelcomeButton({
+class BuildWelcomeButton extends StatelessWidget {
+  const BuildWelcomeButton({
     super.key,
     required this.buttonText,
     required this.onTap,

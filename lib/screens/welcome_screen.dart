@@ -10,7 +10,7 @@ class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) => CustomScaffold(
+  Widget build(BuildContext context) => BuildCustomScaffold(
         child: Column(
           children: [
             Flexible(
@@ -48,7 +48,7 @@ class WelcomeScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     const Expanded(
-                      child: WelcomeButton(
+                      child: BuildWelcomeButton(
                         buttonText: 'Sign in',
                         onTap: SignInScreen(),
                         color: Colors.transparent,
@@ -56,7 +56,7 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: WelcomeButton(
+                      child: BuildWelcomeButton(
                         buttonText: 'Sign up',
                         onTap: const SignUpScreen(),
                         color: Colors.white,

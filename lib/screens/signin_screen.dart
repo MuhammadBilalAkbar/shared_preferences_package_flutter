@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../screens/profile_screen.dart';
 import '../screens/signup_screen.dart';
 import '../widgets/build_custom_scaffold.dart';
-import '../widgets/build_snackbar.dart';
+import '../widgets/show_snackbar.dart';
 import '../widgets/build_text_form_field.dart';
 import '../theme/theme.dart';
 
@@ -94,7 +94,7 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   @override
-  Widget build(BuildContext context) => CustomScaffold(
+  Widget build(BuildContext context) => BuildCustomScaffold(
         child: Column(
           children: [
             const Expanded(flex: 1, child: SizedBox(height: 10)),
