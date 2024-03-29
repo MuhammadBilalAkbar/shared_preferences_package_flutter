@@ -26,7 +26,9 @@ class BuildWelcomeButton extends StatelessWidget {
           padding: const EdgeInsets.all(30.0),
           decoration: BoxDecoration(
             color: color,
-            borderRadius: const BorderRadius.only(topLeft: Radius.circular(50)),
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(50),
+            ),
           ),
           child: Text(
             buttonText,

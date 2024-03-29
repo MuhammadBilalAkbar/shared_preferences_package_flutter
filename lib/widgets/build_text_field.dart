@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class BuildTextFormField extends StatelessWidget {
-  const BuildTextFormField({
+class BuildTextField extends StatelessWidget {
+  const BuildTextField({
     super.key,
     required this.validateText,
     required this.labelText,

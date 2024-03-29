@@ -29,8 +29,13 @@ ThemeData lightMode = ThemeData(
       backgroundColor: lightColorScheme.primary,
       foregroundColor: Colors.white,
       elevation: 5.0,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 18,
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
       minimumSize: const Size(double.infinity, 20),
     ),
   ),
@@ -42,7 +47,6 @@ ThemeData lightMode = ThemeData(
 //   colorScheme: darkColorScheme,
 // );
 
-//
 // const darkColorScheme = ColorScheme(
 //   brightness: Brightness.dark,
 //   primary: Color(0xFF416FDF),

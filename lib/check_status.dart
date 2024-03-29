@@ -18,10 +18,10 @@ class CheckStatus extends StatelessWidget {
   Widget build(BuildContext context) => FutureBuilder(
         future: checkLoginStatus(),
         builder: (context, snapshot) {
-          if (snapshot.data == false) {
-            return const WelcomeScreen();
-          } else if (snapshot.connectionState == ConnectionState.waiting) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.data == false) {
+            return const WelcomeScreen();
           }
           return const ProfileScreen();
         },

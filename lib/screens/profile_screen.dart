@@ -23,6 +23,7 @@ class ProfileScreenState extends State<ProfileScreen> {
       await user!.sendEmailVerification();
       debugPrint('Verification Email has been sent.');
       if (!mounted) return;
+      ScaffoldMessenger.of(context).removeCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
         showSnackBar('Verification Email has been sent'),
       );

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-
 import 'package:icons_plus/icons_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../screens/forget_passsword_screen.dart';
 import '../screens/profile_screen.dart';
 import '../screens/signup_screen.dart';
 import '../widgets/build_custom_scaffold.dart';
 import '../widgets/show_snackbar.dart';
-import '../widgets/build_text_form_field.dart';
+import '../widgets/build_text_field.dart';
 import '../theme/theme.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -20,7 +20,7 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   final formSignInKey = GlobalKey<FormState>();
-  bool rememberPassword = false;
+  bool rememberMe = false;
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -59,7 +59,7 @@ class _SignInScreenState extends State<SignInScreen> {
       );
       final userId = userCredential.user?.uid;
       debugPrint('uid: $userId');
-      if (rememberPassword) {
+      if (rememberMe) {
         final prefs = await SharedPreferences.getInstance();
         final uid = prefs.setString('uid', userId!);
         final email = prefs.setString('email', emailController.text);
@@ -68,6 +68,10 @@ class _SignInScreenState extends State<SignInScreen> {
             'setString => uid: $uid userEmail: $email, password: $password');
       }
       if (!mounted) return;
+      ScaffoldMessenger.of(context).removeCurrentSnackBar();
+      ScaffoldMessenger.of(context).showSnackBar(
+        showSnackBar('Signing In'),
+      );
       Navigator.pushAndRemoveUntil(
         context,
         PageRouteBuilder(
@@ -78,16 +82,19 @@ class _SignInScreenState extends State<SignInScreen> {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         debugPrint('No User Found for that Email');
+        ScaffoldMessenger.of(context).removeCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
           showSnackBar('No User Found for that Email'),
         );
       } else if (e.code == 'wrong-password') {
         debugPrint('Wrong Password Provided by User');
+        ScaffoldMessenger.of(context).removeCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
           showSnackBar('Wrong Password Provided by User'),
         );
       } else {
         debugPrint('$e');
+        ScaffoldMessenger.of(context).removeCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(showSnackBar('$e'));
       }
     }
@@ -124,13 +131,13 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                         ),
                         const SizedBox(height: 40),
-                        BuildTextFormField(
+                        BuildTextField(
                           validateText: 'Please enter Email',
                           labelText: 'Email',
                           controller: emailController,
                         ),
                         const SizedBox(height: 25),
-                        BuildTextFormField(
+                        BuildTextField(
                           validateText: 'Please enter Password',
                           labelText: 'Password',
                           obscureText: true,
@@ -143,9 +150,9 @@ class _SignInScreenState extends State<SignInScreen> {
                             Row(
                               children: [
                                 Checkbox(
-                                  value: rememberPassword,
+                                  value: rememberMe,
                                   onChanged: (value) =>
-                                      setState(() => rememberPassword = value!),
+                                      setState(() => rememberMe = value!),
                                   activeColor: lightColorScheme.primary,
                                 ),
                                 const Text(
@@ -155,6 +162,13 @@ class _SignInScreenState extends State<SignInScreen> {
                               ],
                             ),
                             GestureDetector(
+                              onTap: () => Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ForgetPasswordScreen(),
+                                ),
+                              ),
                               child: Text(
                                 'Forget password?',
                                 style: TextStyle(
@@ -170,9 +184,6 @@ class _SignInScreenState extends State<SignInScreen> {
                           onPressed: () {
                             if (formSignInKey.currentState!.validate()) {
                               signInUser();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                showSnackBar('Signing In'),
-                              );
                             }
                           },
                           child: const Text('Sign in'),
@@ -221,7 +232,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               style: TextStyle(color: Colors.black45),
                             ),
                             GestureDetector(
-                              onTap: () => Navigator.push(
+                              onTap: () => Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                   builder: (_) => const SignUpScreen(),

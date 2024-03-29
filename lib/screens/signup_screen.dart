@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:shared_preferences_package_flutter/widgets/show_snackbar.dart';
-import 'package:shared_preferences_package_flutter/widgets/build_text_form_field.dart';
+import 'package:shared_preferences_package_flutter/widgets/build_text_field.dart';
 
 import '../screens/signin_screen.dart';
 import '../theme/theme.dart';
@@ -41,6 +41,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         );
         debugPrint('UserCredentials: $userCredentials');
         if (!mounted) return;
+        ScaffoldMessenger.of(context).removeCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
           showSnackBar('Registered Successfully. Please Sign In...'),
         );
@@ -53,21 +54,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
           debugPrint('Password Provided is too Weak');
+          ScaffoldMessenger.of(context).removeCurrentSnackBar();
           ScaffoldMessenger.of(context).showSnackBar(
             showSnackBar('Password Provided is too Weak'),
           );
         } else if (e.code == 'email-already-in-use') {
           debugPrint('Account Already exists');
+          ScaffoldMessenger.of(context).removeCurrentSnackBar();
           ScaffoldMessenger.of(context).showSnackBar(
             showSnackBar('Account Already exists'),
           );
         } else {
           debugPrint('$e');
+          ScaffoldMessenger.of(context).removeCurrentSnackBar();
           ScaffoldMessenger.of(context).showSnackBar(showSnackBar('$e'));
         }
       }
     } else {
       debugPrint('Password and Confirm Password doesn\'t match');
+      ScaffoldMessenger.of(context).removeCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
         showSnackBar('Password and Confirm Password doesn\'t match'),
       );
@@ -110,20 +115,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ),
                         const SizedBox(height: 40),
-                        BuildTextFormField(
+                        BuildTextField(
                           validateText: 'Please enter email',
                           labelText: 'Email',
                           controller: emailController,
                         ),
                         const SizedBox(height: 25),
-                        BuildTextFormField(
+                        BuildTextField(
                           validateText: 'Please enter password',
                           labelText: 'Password',
                           controller: passwordController,
                           obscureText: true,
                         ),
                         const SizedBox(height: 25),
-                        BuildTextFormField(
+                        BuildTextField(
                           validateText: 'Please confirm password',
                           labelText: 'Confirm Password',
                           controller: confirmPasswordController,
@@ -162,6 +167,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   agreePersonalData) {
                                 signUpUser();
                               } else if (!agreePersonalData) {
+                                ScaffoldMessenger.of(context).removeCurrentSnackBar();
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   showSnackBar(
                                     'Please agree to the processing of personal data',
@@ -219,7 +225,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                Navigator.push(
+                                Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                     builder: (e) => const SignInScreen(),
