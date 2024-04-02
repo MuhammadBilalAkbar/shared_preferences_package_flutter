@@ -21,7 +21,7 @@ class BuildCustomScaffold extends StatelessWidget {
               width: double.infinity,
               height: double.infinity,
             ),
-            SafeArea(child: child),
+            child,
           ],
         ),
       );
