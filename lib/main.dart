@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import '../check_status.dart';
+import 'utils/check_status.dart';
 import '../theme/theme.dart';
 import 'firebase_options.dart';
 
