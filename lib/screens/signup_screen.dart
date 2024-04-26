@@ -52,23 +52,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
         );
       } on FirebaseAuthException catch (e) {
-        if (e.code == 'weak-password') {
-          debugPrint('Password Provided is too Weak');
-          ScaffoldMessenger.of(context).removeCurrentSnackBar();
-          ScaffoldMessenger.of(context).showSnackBar(
-            showSnackBar('Password Provided is too Weak'),
-          );
-        } else if (e.code == 'email-already-in-use') {
-          debugPrint('Account Already exists');
-          ScaffoldMessenger.of(context).removeCurrentSnackBar();
-          ScaffoldMessenger.of(context).showSnackBar(
-            showSnackBar('Account Already exists'),
-          );
-        } else {
-          debugPrint('$e');
-          ScaffoldMessenger.of(context).removeCurrentSnackBar();
-          ScaffoldMessenger.of(context).showSnackBar(showSnackBar('$e'));
+        String errorMessage;
+        switch (e.code) {
+          case 'weak-password':
+            errorMessage = 'Password Provided is too Weak';
+          case 'email-already-in-use':
+            errorMessage = 'Account Already exists with this email';
+          default:
+            errorMessage = 'Unexpected error';
         }
+        debugPrint(errorMessage);
+        ScaffoldMessenger.of(context).removeCurrentSnackBar();
+        ScaffoldMessenger.of(context).showSnackBar(
+          showSnackBar(errorMessage),
+        );
       }
     } else {
       debugPrint('Password and Confirm Password doesn\'t match');
@@ -167,7 +164,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   agreePersonalData) {
                                 signUpUser();
                               } else if (!agreePersonalData) {
-                                ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                                ScaffoldMessenger.of(context)
+                                    .removeCurrentSnackBar();
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   showSnackBar(
                                     'Please agree to the processing of personal data',
